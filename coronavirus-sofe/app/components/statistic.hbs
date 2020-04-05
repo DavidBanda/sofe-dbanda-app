@@ -1,0 +1,22 @@
+<div class="container">
+    <div class="row">
+        {{#each @statistics as |statistic|}}
+            <div class="col-sm-3 mt-3 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h6 class="card-title">{{statistic.name}}</h6>
+                        <div class="mt-4 mb-4">
+                            <p>Hola</p>
+                        </div>
+                        <p class="card-text size-card">{{statistic.amount}}</p>
+                        <p class="card-text size-current">990 today</p>
+                        <div class="progress" style="height: 5px;">
+                            <div class="progress-bar bg-info" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+</div>
+
