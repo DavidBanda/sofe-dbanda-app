@@ -5,11 +5,7 @@ import { setupApplicationTest } from 'ember-qunit';
 module('Acceptance | super rentals', function(hooks) {
   setupApplicationTest(hooks);
 
-  hooks.beforeEach(function() {
-    this.owner.setupRouter();
-  });
-
-  test('testing the nav-bar', async function(assert) {
+  test('testing the nav-bar function', async function(assert) {
     await visit('/');
 
     assert.dom('nav').exists();
