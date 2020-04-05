@@ -1,0 +1,29 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sm-8 mt-3 mb-3">
+            <div class="card">
+                <div class="card-body" style="background-color: red;">
+                    <h6 class="card-title">Infection Rates</h6>
+                    <div class="container">
+                        <div class="row">
+                            {{#each @data.percent as |percent|}}
+                                <div class="col-sm-3 mt-3 mb-3">
+                                    <div class="card-body" style="background-color: black;">
+                                        <p class="card-text size-card">{{percent.percent}}</p>
+                                        <h6 class="card-title">{{percent.name}}</h6>
+                                    </div>
+                                </div>
+                            {{/each}}
+                            <div class="col-sm-3 mt-3 mb-3">
+                                <div class="card-body" style="background-color: black;">
+                                    <p class="card-text size-card">{{@data.totalNations}}</p>
+                                    <h6 class="card-title">Nations Affected</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

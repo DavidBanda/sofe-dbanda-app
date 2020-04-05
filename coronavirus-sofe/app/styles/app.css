@@ -38,6 +38,11 @@ button {
   font-size: 100%;
 }
 
+#chartdiv {
+  width: 100%;
+  height: 500px;
+}
+
 p {
   line-height: 1.5;
   margin-bottom: 15px;
