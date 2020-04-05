@@ -65,14 +65,17 @@ export default class IndexRoute extends Route {
         {
           "name": "Deaths",
           "percent": formatNumber((deaths * 100 / (deaths + recovered)).toFixed(2)) + "%",
+          "progress": "text-danger",
         },
         {
           "name": "Recoveries",
           "percent": formatNumber((recovered * 100 / (deaths + recovered)).toFixed(2)) + "%",
+          "progress": "text-success",
         },
         {
           "name": "Critical",
           "percent": formatNumber((totalCritical * 100 / (cases - recovered - deaths)).toFixed(2)) + "%",
+          "progress": "text-warning",
         }
       ]}
     }

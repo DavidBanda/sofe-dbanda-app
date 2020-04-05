@@ -1,25 +1,21 @@
-<div class="container">
-    <div class="row">
-        <div class="col-sm-8 mt-3 mb-3">
-            <div class="card">
-                <div class="card-body" style="background-color: red;">
-                    <h6 class="card-title">Infection Rates</h6>
-                    <div class="container">
-                        <div class="row">
-                            {{#each @data.percent as |percent|}}
-                                <div class="col-sm-3 mt-3 mb-3">
-                                    <div class="card-body" style="background-color: black;">
-                                        <p class="card-text size-card">{{percent.percent}}</p>
-                                        <h6 class="card-title">{{percent.name}}</h6>
-                                    </div>
-                                </div>
-                            {{/each}}
-                            <div class="col-sm-3 mt-3 mb-3">
-                                <div class="card-body" style="background-color: black;">
-                                    <p class="card-text size-card">{{@data.totalNations}}</p>
-                                    <h6 class="card-title">Nations Affected</h6>
-                                </div>
+<div class="col-sm-7 mt-3 mb-3">
+    <div class="card">
+        <div class="card-body">
+            <h6 class="card-title">Infection Rates</h6>
+            <div class="container">
+                <div class="row">
+                    {{#each @data.percent as |percent|}}
+                        <div class="col-sm-5 mt-3 mb-3 ml-5">
+                            <div class="card-body" style="background-color: #282e38;">
+                                <p class="card-text size-card {{percent.progress}}" style="text-align: center;">{{percent.percent}}</p>
+                                <h6 class="card-title" style="text-align: center;">{{percent.name}}</h6>
                             </div>
+                        </div>
+                    {{/each}}
+                    <div class="col-sm-5 mt-3 mb-3 ml-5">
+                        <div class="card-body" style="background-color: #282e38;">
+                            <p class="card-text size-card text-info" style="text-align: center;">{{@data.totalNations}}</p>
+                            <h6 class="card-title" style="text-align: center;">Nations Affected</h6>
                         </div>
                     </div>
                 </div>

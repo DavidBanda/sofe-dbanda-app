@@ -1,7 +1,11 @@
 <Statistic @statistics={{@model.data}} />
+<div class="container">
+    <div class="row">
+        <Piechart />
+        <Rates @data={{@model.percent}}/>
+    </div>
+</div>
 
-<Piechart />
-<Rates @data={{@model.percent}}/>
 
 
 
