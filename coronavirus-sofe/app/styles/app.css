@@ -40,7 +40,17 @@ button {
 
 #pieChart {
   width: 100%;
-  height: 20.5rem;
+  height: 22rem;
+}
+
+#gaugeChart {
+  width: 100%;
+  height: 22rem;
+}
+
+#axesChart {
+  width: 100%;
+  height: 22rem;
 }
 
 p {

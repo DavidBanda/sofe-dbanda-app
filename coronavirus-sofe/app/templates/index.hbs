@@ -1,6 +1,13 @@
 <Statistic @statistics={{@model.data}} />
 <div class="container">
     <div class="row">
+        
+    </div>
+    <div class="row">
+        <GaugeChart />
+        <MultipleAxes />
+    </div>
+    <div class="row">
         <Piechart />
         <Rates @data={{@model.percent}}/>
     </div>
