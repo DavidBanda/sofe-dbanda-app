@@ -5,8 +5,8 @@
                 <div class="card">
                     <div class="card-body">
                         <h6 class="card-title">{{statistic.name}}</h6>
-                        <div class="mt-4 mb-4">
-                            <p>Hola</p>
+                        <div class="percent mt-4 mb-4 {{statistic.progress}}">
+                            <p class="mt-1">{{statistic.percent}} <i class="fa fa-line-chart ml-1" aria-hidden="true"></i></p>
                         </div>
                         <p class="card-text size-card">{{statistic.amount}}</p>
                         <p class="card-text size-current">{{statistic.today}}</p>

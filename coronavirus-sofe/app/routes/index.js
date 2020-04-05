@@ -13,7 +13,6 @@ export default class IndexRoute extends Route {
     let deaths = data.deaths;
     let cases = data.cases;
     let recovered = data.recovered;
-    let updated = data.updated;
 
     let currentData = await fetch('http://api.coronastatistics.live/countries');
     let current = await currentData.json();
@@ -36,24 +35,28 @@ export default class IndexRoute extends Route {
         "amount": formatNumber(cases),
         "progress": "bg-info",
         "today": formatNumber(todayCases) + ' today',
+        "percent": "",
       },
       {
         "name": "Deaths",
         "amount": formatNumber(deaths),
         "progress": "bg-danger",
         "today": formatNumber(todayDeaths) + ' today',
+        "percent": formatNumber((deaths * 100 / (deaths + recovered)).toFixed(2)) + "%",
       },
       {
         "name": "Recoveries",
         "amount": formatNumber(recovered),
         "progress": "bg-success",
         "today": formatNumber(cases - recovered - deaths) + ' remining',
+        "percent": formatNumber((recovered * 100 / (deaths + recovered)).toFixed(2)) + "%",
       },
       {
         "name": "Critical",
         "amount": formatNumber(totalCritical),
         "progress": "bg-warning",
-        "today": formatNumber(perMillion) + ' per million',
+        "today": formatNumber(perMillion.toFixed(2)) + ' per million',
+        "percent": formatNumber((totalCritical * 100 / (cases - recovered - deaths)).toFixed(2)) + "%",
       }
     ]}
   }

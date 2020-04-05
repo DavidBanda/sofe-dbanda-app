@@ -21,7 +21,7 @@ div,
 span,
 a,
 button {
-  font-family: 'Lato', 'Open Sans', 'Helvetica Neue', 'Segoe UI', Helvetica, Arial, sans-serif;
+  font-family: 'Roboto', Helvetica, Arial, sans-serif;
   line-height: 1.5;
 }
 
@@ -99,6 +99,21 @@ p {
      color: #979da7;
      font-size: 1rem;
      text-align: right;
+ }
+
+ .container .percent {
+  width: 5rem;
+  height: 1.5rem;
+  border: .1px solid;
+  border-radius: 25px;
+  margin-left: 2rem;
+ }
+
+ .container .percent p {
+    text-align: left;
+    padding-left: .7rem;
+    font-size: .7rem;
+    font-weight: bolder;
  }
 
  /**
@@ -436,9 +451,7 @@ p {
 
   .menu {
     height: 4rem;
-    background-color: #677ae4;
-    background-color: #05526A;
-    background-color: #e46855;
+    background-color: #262b35;
   }
 
   .menu img {
