@@ -1,0 +1,15 @@
+ember new name-newproject --Start a new project
+
+ember serve --Run server
+
+ember generate route name-newroute --Define a new route, that creates two files, one in routes and another in templates
+
+ember generate component name-component --Crate a component in the app, generates one file in components
+
+ember generate component-class nameComponent --Generate a javascript file for a component
+
+ember generate component name-component --with-component-class -- Generate a component in the app, generate two files in components, one file in js and the other in .hbs
+
+ember generate <type> name-Test --create a test
+
+ember t -s --Run test
