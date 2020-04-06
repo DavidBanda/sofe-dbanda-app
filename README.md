@@ -1,6 +1,5 @@
 # sofe-dbanda-app
 
-
 ## Prerequisites
 
 You will have to have previously installed
@@ -11,7 +10,24 @@ You will have to have previously installed
 
 ## Installation
 
-
 ```bash
 git clone https://github.com/DavidBanda/sofe-dbanda-app
+```
+
+```bash
+cd sofe-dbanda-app
+```
+
+```bash
+npm install
+```
+
+## Run Project
+
+```bash
+ember server
+```
+
+You can access it at ```bash
+http://localhost:4200.
 ```
