@@ -1,6 +1,6 @@
 # sofe-dbanda-app
 
-Coronavirus App. First Program in Javacript
+Coronavirus App. My First Program in Javacript
 
 ## Prerequisites
 
