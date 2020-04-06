@@ -28,4 +28,4 @@ npm install
 ember server
 ```
 
-You can access it at (http://localhost:4200)
+You can access it at http://localhost:4200
