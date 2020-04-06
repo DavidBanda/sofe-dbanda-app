@@ -48,9 +48,31 @@ button {
   height: 22rem;
 }
 
+.affected-countries h6 {
+  margin: 0;
+  display: inline-block;
+}
+
+.affected-countries p {
+  display: inline;
+  padding-left: 3rem;
+}
+
 #axesChart {
   width: 100%;
   height: 22rem;
+}
+
+.form-group {
+  overflow: hidden;
+}
+
+.my-option {
+  text-align: center;
+}
+
+.input-search{
+  float: left;
 }
 
 p {
@@ -89,10 +111,6 @@ p {
   margin: 0 auto;
   position: fixed;
 } */
-
-.container {
-
-}
 
 .container .card{
     background-color: #323a46;
