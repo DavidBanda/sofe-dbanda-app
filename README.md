@@ -1,5 +1,7 @@
 # sofe-dbanda-app
 
+Coronavirus App. First Program in Javacript
+
 ## Prerequisites
 
 You will have to have previously installed
