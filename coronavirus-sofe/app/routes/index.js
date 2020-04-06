@@ -20,6 +20,7 @@ export default class IndexRoute extends Route {
     let todayCases = 0;
     let todayDeaths = 0;
     let perMillion = 0;
+    let orderedCountries = current;
 
     for (var i = 0; i < current.length; i++) {
       totalCritical += current[i].critical;
@@ -29,7 +30,7 @@ export default class IndexRoute extends Route {
     }
 
     function sortResults(prop, asc) {
-      current.sort(function(a, b) {
+      orderedCountries.sort(function(a, b) {
           if (asc) {
               return (a[prop] > b[prop]) ? 1 : ((a[prop] < b[prop]) ? -1 : 0);
           } else {
@@ -39,9 +40,6 @@ export default class IndexRoute extends Route {
     }
 
     sortResults('cases', false)
-
-    console.log(current)
-
 
     return { data: [
       {
@@ -91,7 +89,10 @@ export default class IndexRoute extends Route {
           "percent": formatNumber((totalCritical * 100 / (cases - recovered - deaths)).toFixed(2)) + "%",
           "progress": "text-warning",
         }
-      ]}
+      ]},
+      orderedCountries: {
+        "orderedCountries": orderedCountries
+      }
     }
   }
 }

@@ -1,34 +1,52 @@
 import Component from '@glimmer/component';
 
+function formatNumber(num) {
+  return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+}
+
 export default class MapComponent extends Component {
     get gauge() {
-        am4core.ready(function() {
+        am4core.ready(async function() {
 
             // Themes begin
             am4core.useTheme(am4themes_animated);
             // Themes end
             
-            
-            
+            let generalData = await fetch('http://api.coronastatistics.live/all');
+            let data = await generalData.json();
+            let deaths = data.deaths;
+            let cases = data.cases;
+            let recovered = data.recovered;
+
+            let currentData = await fetch('http://api.coronastatistics.live/countries');
+            let current = await currentData.json();
+            let totalCritical = 0;  
+            let active = 0;
+
+            for (var i = 0; i < current.length; i++) {
+              totalCritical += current[i].critical;
+              active += current[i].active;
+            }
+
             // Create chart instance
             var chart = am4core.create("gaugeChart", am4charts.RadarChart);
             
             // Add data
             chart.data = [{
               "category": "Critical",
-              "value": 80,
+              "value": totalCritical * 100 / (cases - recovered - deaths),
               "full": 100,
             }, {
               "category": "Death",
-              "value": 35,
+              "value": deaths * 100 / (deaths + recovered),
               "full": 100
             }, {
               "category": "Recovered",
-              "value": 92,
+              "value": recovered * 100 / (deaths + recovered),
               "full": 100
             }, {
               "category": "Active",
-              "value": 68,
+              "value": active * 100 / (cases - recovered),
               "full": 100
             }];
             
@@ -39,6 +57,13 @@ export default class MapComponent extends Component {
             
             // Set number format
             chart.numberFormatter.numberFormat = "#.#'%'";
+
+            chart.colors.list = [
+              am4core.color("#f0ad4e"),
+              am4core.color("#d9534f"),
+              am4core.color("#5cb85c"),
+              am4core.color("#5bc0de"),
+            ];
             
             // Create axes
             var categoryAxis = chart.yAxes.push(new am4charts.CategoryAxis());

@@ -2,7 +2,7 @@ import Component from '@glimmer/component';
 
 export default class MapComponent extends Component {
     get axes() {
-        am4core.ready(function() {
+        am4core.ready(async function() {
 
             // Themes begin
             am4core.useTheme(am4themes_animated);
@@ -15,13 +15,35 @@ export default class MapComponent extends Component {
             
             // Increase contrast by taking evey second color
             chart.colors.step = 2;
+
+            let generalData = await fetch('http://api.coronastatistics.live/all');
+            let data = await generalData.json();
+            var deaths = data.deaths;
+            var cases = data.cases;
+            var recovered = data.recovered;
+
+            let generalDates = await fetch('http://api.coronastatistics.live/timeline/global');
+            let dates = await generalDates.json();
+            let keys = Object.keys(dates)
+
+            console.log(keys.length);
+            console.log(keys[0]);
+            console.log(dates[keys[0]].cases);
             
             // Add data
             chart.data = generateChartData();
             
             // Create axes
             var dateAxis = chart.xAxes.push(new am4charts.DateAxis());
-            dateAxis.renderer.minGridDistance = 50;
+            dateAxis.renderer.minGridDistance = 40;
+
+            chart.colors.list = [
+              am4core.color("#d9534f"),
+              am4core.color("#5cb85c"),
+              am4core.color("#5bc0de"),
+              am4core.color("#5cb85c"),
+            ];
+
             
             // Create series
             function createAxisAndSeries(field, name, opposite, bullet) {
@@ -42,54 +64,22 @@ export default class MapComponent extends Component {
               
               var interfaceColors = new am4core.InterfaceColorSet();
               
-              switch(bullet) {
-                case "triangle":
-                  var bullet = series.bullets.push(new am4charts.Bullet());
-                  bullet.width = 12;
-                  bullet.height = 12;
-                  bullet.horizontalCenter = "middle";
-                  bullet.verticalCenter = "middle";
-                  
-                  var triangle = bullet.createChild(am4core.Triangle);
-                  triangle.stroke = interfaceColors.getFor("background");
-                  triangle.strokeWidth = 2;
-                  triangle.direction = "top";
-                  triangle.width = 12;
-                  triangle.height = 12;
-                  break;
-                case "rectangle":
-                  var bullet = series.bullets.push(new am4charts.Bullet());
-                  bullet.width = 10;
-                  bullet.height = 10;
-                  bullet.horizontalCenter = "middle";
-                  bullet.verticalCenter = "middle";
-                  
-                  var rectangle = bullet.createChild(am4core.Rectangle);
-                  rectangle.stroke = interfaceColors.getFor("background");
-                  rectangle.strokeWidth = 2;
-                  rectangle.width = 10;
-                  rectangle.height = 10;
-                  break;
-                default:
-                  var bullet = series.bullets.push(new am4charts.CircleBullet());
-                  bullet.circle.stroke = interfaceColors.getFor("background");
-                  bullet.circle.strokeWidth = 2;
-                  break;
-              }
               
               valueAxis.renderer.line.strokeOpacity = 1;
               valueAxis.renderer.line.strokeWidth = 2;
               valueAxis.renderer.line.stroke = series.stroke;
               valueAxis.renderer.labels.template.fill = series.stroke;
+              
               valueAxis.renderer.opposite = opposite;
             }
             
-            createAxisAndSeries("visits", "Visits", false, "circle");
-            createAxisAndSeries("views", "Views", true, "triangle");
-            createAxisAndSeries("hits", "Hits", true, "rectangle");
+            createAxisAndSeries("visits", "Deaths", false, "circle");
+            createAxisAndSeries("views", "Cases", true, "triangle");
+            createAxisAndSeries("hits", "Recoveries", true, "rectangle");
             
             // Add legend
             chart.legend = new am4charts.Legend();
+            chart.legend.labels.template.fill = am4core.color("#fff");
             
             // Add cursor
             chart.cursor = new am4charts.XYCursor();
@@ -97,30 +87,30 @@ export default class MapComponent extends Component {
             // generate some random data, quite different range
             function generateChartData() {
               var chartData = [];
-              var firstDate = new Date();
-              firstDate.setDate(firstDate.getDate() - 100);
+              var firstDate = new Date(keys[0]);
+              firstDate.setDate(firstDate.getDate());
               firstDate.setHours(0, 0, 0, 0);
             
-              var visits = 1600;
-              var hits = 2900;
-              var views = 8700;
+              var visits = deaths;
+              var hits = recovered;
+              var views = cases;
             
-              for (var i = 0; i < 15; i++) {
+              for (var i = 1; i < keys.length; i++) {
                 // we create date objects here. In your data, you can have date strings
                 // and then set format of your dates using chart.dataDateFormat property,
                 // however when possible, use date objects, as this will speed up chart rendering.
                 var newDate = new Date(firstDate);
                 newDate.setDate(newDate.getDate() + i);
             
-                visits += Math.round((Math.random()<0.5?1:-1)*Math.random()*10);
-                hits += Math.round((Math.random()<0.5?1:-1)*Math.random()*10);
-                views += Math.round((Math.random()<0.5?1:-1)*Math.random()*10);
+                // visits += dates[keys[i]].cases - dates[keys[i - 1]].cases;
+                // hits += Math.round((Math.random()<0.5?1:-1)*Math.random()*10);
+                // views += Math.round((Math.random()<0.5?1:-1)*Math.random()*10);
             
                 chartData.push({
                   date: newDate,
-                  visits: visits,
-                  hits: hits,
-                  views: views
+                  visits: dates[keys[i]].deaths,
+                  hits: dates[keys[i]].recovered,
+                  views: dates[keys[i]].cases
                 });
               }
               return chartData;
